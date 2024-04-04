@@ -23,9 +23,9 @@ main:
   .equ KIWI_bm, (1 << 6)
   
   //Nibble 3
-  .equ ALMONDS_bm, (1 << 12)
-  .equ WALNUTS_bm, (1 << 13)
-  .equ PEANUTS_bm, (1 << 14)
+  .equ ALMONDS_bm, (1 << 13) //Problem: Almonds und Tea überscheiden sich
+  .equ WALNUTS_bm, (1 << 14)
+  .equ PEANUTS_bm, (1 << 15)
 
   //Byte 1
   .equ WATER_bm, (1 << 8)
@@ -43,9 +43,10 @@ main:
 
   ldr r0, =BREAKFAST_bm
   ldr r1, =(BREAKFAST_bm | FRUITS_bm)
-  ldr r2, =(BREAKFAST_bm & ~MILK_bm | RUM_bm)
+  ldr r2, =((BREAKFAST_bm & ~MILK_bm) | RUM_bm)
   ldr r3, =(((FRUITS_bm | MILK_bm) << 16) | MILK_bm)
-  ldr r4, =((BREAKFAST_bm & ~(BUTTER_bm | CHEESE_bm | MILK_bm)) | WATER_bm)
+  ldr r4, =((BREAKFAST_bm & ~(BUTTER_bm | CHEESE_bm | MILK_bm
+  )) | TEA_bm)
 
 stop:
 	nop

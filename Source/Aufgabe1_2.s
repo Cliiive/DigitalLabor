@@ -16,9 +16,14 @@ main:
   mov r0, #0xffffffff
   mov r1, #1
   add r2, r0, r1
+
+  //b
+  mov r0, #-1
+  mov r1, #1
+  add r2, r0, r1
   
   //c
-  mov r3, #0x80000000
+  mov r3, #1 << 31
   add r4, r3, r3
 
 
