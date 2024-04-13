@@ -12,22 +12,38 @@
 .code 32 /* Select ARM instruction set */
 .global main /* Specify global symbol */
 main:
-  mov r0,#5 //Multiplikator
-  mov r1,# (1 << 31) //Zahl
+  // mov r0,#5 //Multiplikator
+  // mov r1,# (1 << 31) //Zahl
+  // mov r2,#0 //Ergebnis
+
+  // mov r3,#0 //Überläufe
+  // mov r4,#1
+  
+  // while:
+  //   movs r0,r0
+  //   beq stop
+  //   adds r2, r2, r1 //Zahl auf Ergebnis addieren
+  //   addcs r3, r3, r4
+    
+  //   sub r0,#1
+  //   b while
+
+  mov r0,#0 //Multiplikator
+  mov r1,#2 //Zahl
   mov r2,#0 //Ergebnis
 
   mov r3,#0 //Überläufe
   mov r4,#1
   
-  while:
-    movs r0,r0
-    beq stop
+  cmp r0, #0   // Prüfen, ob der Multiplikator Null ist
+  beq stop     
+
+  do_while:
     adds r2, r2, r1 //Zahl auf Ergebnis addieren
     addcs r3, r3, r4
     
-    sub r0,#1
-    b while
-
+    subs r0,#1
+    bne do_while
 
 stop:
 	nop
