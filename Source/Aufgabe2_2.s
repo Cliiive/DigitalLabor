@@ -28,19 +28,18 @@ main:
   //   sub r0,#1
   //   b while
 
-  mov r0,#0 //Multiplikator
+  mov r0,#2 //Multiplikator
   mov r1,#2 //Zahl
   mov r2,#0 //Ergebnis
 
   mov r3,#0 //Überläufe
-  mov r4,#1
-  
+    
   cmp r0, #0   // Prüfen, ob der Multiplikator Null ist
   beq stop     
 
   do_while:
     adds r2, r2, r1 //Zahl auf Ergebnis addieren
-    addcs r3, r3, r4
+    addcs r3, r3, #1
     
     subs r0,#1
     bne do_while

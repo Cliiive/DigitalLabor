@@ -36,9 +36,9 @@ main:
   ldr r5,=data
 
   
-  //While (Datenmenge != 0):
+  //Do ... While (Datenmenge != 0):
   while:
-    //Fehler im Struktogramm: das schieben Erflogt immer nach dem verodern
+    //Fehler im Struktogramm: das schieben Erfolgt immer nach dem verodern
     //D.h das 0-te nibble wird immer leer sein
     //Lösung: Am anfang der while schleife schieben
      
@@ -57,7 +57,7 @@ main:
     //Register verodern
     orr r0, r0, r1
 
-    //Datenmenge-- & s
+    //Datenmenge--
     subs r4,#1
     bne while
 

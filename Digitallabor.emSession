@@ -4,8 +4,8 @@
  <Breakpoints groups="Breakpoints" active_group="Breakpoints">
   <BreakpointListItem trigger="Execute" line="0" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="0x40000368" group="Breakpoints" type="Breakpoint" state="3" filename="../Workspace_DTL" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="Execute" line="0" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="0x4000038c" group="Breakpoints" type="Breakpoint" state="3" filename="../Workspace_DTL" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="16" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="Source/Aufgabe2_1.s" useHWbreakpoint="false"/>
-  <BreakpointListItem trigger="" line="31" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="Source/Aufgabe2_2.s" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="16" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="Source/Aufgabe2_1.s" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="31" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="Source/Aufgabe2_2.s" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="14" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="Source/BeispielAufgabe1_1.s" useHWbreakpoint="false"/>
   <Exceptions set="Reset;Undef;P_Abort;D_Abort"/>
  </Breakpoints>
@@ -158,8 +158,10 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="18" y="31" useTextEdit="1" path="Source/Aufgabe2_2.s" left="0" selected="1" top="16" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="23" y="34" useTextEdit="1" path="Source/Aufgabe2_2.s" left="0" top="12" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="105" useTextEdit="1" path="System/crt0.s" left="0" top="74" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="39" useTextEdit="1" path="Source/Aufgabe2_1.s" left="0" selected="1" top="3" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="66" useTextEdit="1" path="Source/Aufgabe2_3.s" left="0" top="30" codecName="Default"/>
  </Files>
  <EMStudioWindow activeProject="Aufgabe2" fileDialogDefaultFilter="*.asm;*.s;*.inc" autoConnectTarget="Simulator" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/hs/dtl/Workspace_DTL/Source" debugSearchPath="" autoConnectCapabilities="4415"/>
 </session>

@@ -20,20 +20,31 @@ main:
   mov r2,# (1 << 31) //Lower-Word
   mov r3,# (1 << 31) //Higher-Word
 
-  //Starten mit der Addition
-  adds r4, r0, r2 //Lower-Word Ergebnis
-  mov r7,#0 
-  movcs r7,#1 //Überlauf temporär speichern falls C Flag = 1
+  //Init Ergebnis Register
+  mov r4,#0
+  mov r5,#0
+  mov r6,#0
 
-  adds r5, r1, r2 //Higher-Word Ergebnis
-  mov r8,#0
-  movcs r8,#1 //Überlauf temporär speichern falls C Flag = 1
+  adds r4, r0, r2
 
-  adds r5, r7, r5 //Überlauf von Lower mit Higher addieren & überlauf speichern
-  mov r9,#0
-  movcs r9,#1
+  adc r5, r1, r3
 
-  add r6, r9, r8 //Beide Überläufe addieren
+  adc r6, r6
+
+  // Starten mit der Addition
+  // adds r4, r0, r2 //Lower-Word Ergebnis
+  // mov r7,#0 
+  // movcs r7,#1 //Überlauf temporär speichern falls C Flag = 1
+
+  // adds r5, r1, r2 //Higher-Word Ergebnis
+  // mov r8,#0
+  // movcs r8,#1 //Überlauf temporär speichern falls C Flag = 1
+
+  // adds r5, r7, r5 //Überlauf von Lower mit Higher addieren & überlauf speichern
+  // mov r9,#0
+  // movcs r9,#1
+
+  // add r6, r9, r8 //Beide Überläufe addieren
 
 
 stop:
