@@ -3,8 +3,8 @@
  *
  * SoSe 2024
  *
- *  Created on: <$Date>
- *      Author: <$Name>
+ *  Created on: <14.05.2024>
+ *      Author: <Jonas Sasowski>
  *
  *	Aufgabe : Unterprogrammaufruf  mit Parametern
  */
