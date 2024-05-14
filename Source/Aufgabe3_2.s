@@ -11,7 +11,17 @@
 .text /* Specify that code goes in text segment */
 .code 32 /* Select ARM instruction set */
 .global main /* Specify global symbol */
+
 main:
+  mov r0,#3 //Parameter für delay
+  bl delay_function
+  b stop
+
+delay_function:
+  loop:
+    subs r0, r0, #1
+    bne loop
+  bx lr
 
 
 stop:
