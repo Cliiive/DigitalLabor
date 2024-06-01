@@ -9,6 +9,7 @@
   <BreakpointListItem trigger="" line="29" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="Source/Aufgabe3_1.s" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="27" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="Source/Aufgabe3_2.s" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="15" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="Source/Aufgabe3_3.s" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="16" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="Source/Aufgabe4_1.s" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="14" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="Source/BeispielAufgabe1_1.s" useHWbreakpoint="false"/>
   <Exceptions set="Reset;Undef;P_Abort;D_Abort"/>
  </Breakpoints>
@@ -37,7 +38,7 @@
   <MemoryWindow addressSpace="" dataSize="4" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="Aufgabe8_Debug" sizeText="" addressText="0xFFFFF030"/>
   <MemoryWindow addressSpace="" dataSize="4" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="test_Debug" sizeText="" addressText="0x40001608"/>
   <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="Aufgabe7_Debug" sizeText="" addressText="0x400013B0"/>
-  <MemoryWindow addressSpace="" dataSize="4" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="Aufgabe4_Debug" sizeText="" addressText="0x40000FC0"/>
+  <MemoryWindow addressSpace="" dataSize="4" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="Aufgabe4_Debug" sizeText="" addressText="0x4000136C"/>
   <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="Aufgabe6_Debug" sizeText="" addressText=""/>
   <MemoryWindow addressSpace="" dataSize="4" autoEvaluate="0" viewMode="0" viewType="4" addressOrder="0" columnsText="" refreshPeriod="0" name="Aufgabe3_Debug" sizeText="" addressText="0x400002BC"/>
  </Memory1>
@@ -85,12 +86,10 @@
  </Memory4>
  <Project>
   <ProjectSessionItem path="Digitallabor"/>
-  <ProjectSessionItem path="Digitallabor;Aufgabe2"/>
-  <ProjectSessionItem path="Digitallabor;Aufgabe2;Source"/>
-  <ProjectSessionItem path="Digitallabor;Aufgabe2;System"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe3"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe3;Source"/>
-  <ProjectSessionItem path="Digitallabor;Aufgabe3;System"/>
+  <ProjectSessionItem path="Digitallabor;Aufgabe4"/>
+  <ProjectSessionItem path="Digitallabor;Aufgabe4;Source"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe9"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe9;Source"/>
  </Project>
@@ -173,13 +172,12 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="62" useTextEdit="1" path="Source/Aufgabe3_2.s" left="0" top="23" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="37" useTextEdit="1" path="Source/Aufgabe3_3.s" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="105" useTextEdit="1" path="System/crt0.s" left="0" top="74" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="13" y="61" useTextEdit="1" path="Source/Aufgabe2_3.s" left="0" top="21" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="18" y="17" useTextEdit="1" path="Source/Aufgabe3_4.s" left="0" selected="1" top="26" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="23" useTextEdit="1" path="Source/Aufgabe4_1.s" left="0" top="12" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/Aufgabe2_2.s" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="65" useTextEdit="1" path="Source/Aufgabe3_1.s" left="0" top="5" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/Aufgabe2_1.s" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/Aufgabe3_1.s" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/Aufgabe3_2.s" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Output/Debug/Obj/Aufgabe4/Aufgabe4_1_PP.s" left="0" selected="1" top="0" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="Aufgabe3" fileDialogDefaultFilter="*.asm;*.s;*.inc" autoConnectTarget="Simulator" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/hs/dtl/Workspace_DTL/Source" debugSearchPath="" autoConnectCapabilities="4415"/>
+ <EMStudioWindow activeProject="Aufgabe4" fileDialogDefaultFilter="*.asm;*.s;*.inc" autoConnectTarget="Simulator" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/hs/dtl/Workspace_DTL/Source" debugSearchPath="" autoConnectCapabilities="4415"/>
 </session>

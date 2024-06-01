@@ -3,8 +3,8 @@
  *
  * SoSe 2024
  *
- *  Created on: <$Date>
- *      Author: <$Name>
+ *  Created on: <01.06.2024>
+ *      Author: <Jonas Sasowski>
  *
  *	Aufgabe : Verwendung von Stack
  */
@@ -29,42 +29,32 @@ stop:
 
 function_1:
   push {r0, r1, lr}
-  
-  //Lokale variablen anlegen
-  variable_a:
-  .byte 0xaa
-  
-  variable_b:
-  .hword 0xbbbb
-  
-  variable_c:
-  .word 0xcccccccc
 
+  //speicher für lokale Variablen allokieren
+  sub sp, sp, #8
+  
   //variablen auf dem Stack initialisieren
   //a
-  ldr r0,=#variable_a
-  ldrb r0, [r0]
-  push {r0}
+  ldr r0,=-5
+  strb r0, [sp]
 
   //b
-  ldr r0,=#variable_b
-  ldrh r0, [r0]
-  push {r0}
+  ldr r0,=2
+  strh r0, [sp, #2] 
 
   //c
-  ldr r0,=#variable_c
-  ldr r0, [r0]
-  push {r0}
+  ldr r0,=0
+  str r0, [sp, #4]
 
-  ldr r0, [sp, #8] //a in r0 laden
-  ldr r1, [sp, #4] //b in r1 laden
+  ldrsb r0, [sp] //a in r0 laden
+  ldrh r1, [sp, #2] //b in r1 laden
 
   bl function_2
 
-  str r0, [sp] //wert von r0 in c speichern
+  str r0, [sp, #4] //wert von r0 in c speichern
   
   //Stack bereinigen & Register zurückschreiben
-  add sp, sp, #12
+  add sp, sp, #8
   pop {r0, r1, pc}
 
 
