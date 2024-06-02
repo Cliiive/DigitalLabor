@@ -3,8 +3,8 @@
  *
  * SoSe 2024
  *
- *  Created on: <$Date>
- *      Author: <$Name>
+ *  Created on: <02.06.2024>
+ *      Author: <Jonas Sasowski>
  *
  *	Aufgabe : Addition von zwei 8 stelligen BCD Zahlen
  */
