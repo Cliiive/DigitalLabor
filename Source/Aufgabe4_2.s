@@ -59,23 +59,4 @@ bcd_addition:
 
   pop {r0-r1, r3-r8, pc}
 
-
-
-
-
-
-    
-
-
-    
-
-
-    
-
-
-    sub r2, r2, #1
-    bne loop
-
-
-
 .end

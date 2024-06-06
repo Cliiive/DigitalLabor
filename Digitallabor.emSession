@@ -86,10 +86,6 @@
  </Memory4>
  <Project>
   <ProjectSessionItem path="Digitallabor"/>
-  <ProjectSessionItem path="Digitallabor;Aufgabe1"/>
-  <ProjectSessionItem path="Digitallabor;Aufgabe1;Source"/>
-  <ProjectSessionItem path="Digitallabor;Aufgabe3"/>
-  <ProjectSessionItem path="Digitallabor;Aufgabe3;Source"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe4"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe4;Source"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe9"/>
@@ -174,10 +170,13 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="35" useTextEdit="1" path="Source/Aufgabe4_2.s" left="0" selected="1" top="15" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/Aufgabe1_2.s" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/Aufgabe1_4.s" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/Aufgabe1_1.s" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/Aufgabe2_3.s" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="42" useTextEdit="1" path="Source/Aufgabe4_2.s" left="0" selected="1" top="14" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="72" useTextEdit="1" path="Source/Aufgabe4_1.s" left="0" top="12" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="1" useTextEdit="1" path="Source/Aufgabe4_3.s" left="0" top="0" codecName="Default"/>
  </Files>
  <EMStudioWindow activeProject="Aufgabe4" fileDialogDefaultFilter="*.asm;*.s;*.inc" autoConnectTarget="Simulator" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/hs/dtl/Workspace_DTL/Source" debugSearchPath="" autoConnectCapabilities="4415"/>
 </session>
