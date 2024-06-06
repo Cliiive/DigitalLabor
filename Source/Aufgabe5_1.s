@@ -21,6 +21,8 @@
 
 main:
   ldr sp, =0x40001000 //Stack initialisieren
+
+  //alle Lampen aus schalten
   ldr r0, =IODIR1 //Adresse in r0 laden
   ldr r1, =RESET_MASK //Maske um die register zurückzusetzen in r1 laden
   str r1, [r0] //register der lampen auf 1 setzen (senden)

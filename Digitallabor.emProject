@@ -262,10 +262,10 @@
     </folder>
     <folder Name="Source">
       <file file_name="Source/Aufgabe5_1.s">
-        <configuration Name="Debug" build_exclude_from_build="No" />
+        <configuration Name="Debug" build_exclude_from_build="Yes" />
       </file>
       <file file_name="Source/Aufgabe5_2.s">
-        <configuration Name="Debug" build_exclude_from_build="Yes" />
+        <configuration Name="Debug" build_exclude_from_build="No" />
       </file>
       <file file_name="Source/Aufgabe5_3.s">
         <configuration Name="Debug" build_exclude_from_build="Yes" />
