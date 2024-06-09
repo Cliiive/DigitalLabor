@@ -40,14 +40,12 @@ main:
     ldr r6, =0x999999 //Delay parameter
     push {r6} //Parameter auf dem Stack übergeben
     bl delay_function
-    ldr sp, =0x40001000 //Stack berreinigen
 
     //Lampe aus schalten
     str r3, [r5]
     ldr r6, =0x111111
     push {r6}
     bl delay_function
-    ldr sp, =0x40001000 //Stack berreinigen
     
     add r2, #1
     cmp r2, #8
