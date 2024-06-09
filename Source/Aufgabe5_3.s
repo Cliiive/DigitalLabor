@@ -3,8 +3,8 @@
  *
  * SoSe 2024
  *
- *  Created on: <$Date>
- *      Author: <$Name>
+ *  Created on: <Jonas Sasowski>
+ *      Author: <09.06.2024>
  *
  *	Aufgabe : Ein- und Ausgabe über Taster und LEDs
  */
