@@ -42,16 +42,19 @@ EntryTable:
 .equ BUTTON_2_bm, (1<<12)
 .equ BUTTON_3_bm, (1<<13)
 
-.equ LED_0_bm, (1<<16)
-.equ LED_1_bm, (1<<17)
-.equ LED_2_bm, (1<<18)
-.equ LED_3_bm, (1<<19)
-.equ LED_4_bm, (1<<20)
-.equ LED_5_bm, (1<<21)
-.equ LED_6_bm, (1<<22)
-.equ LED_7_bm, (1<<23)
+.equ LED_0_bm, 1
+.equ LED_1_bm, 2
+.equ LED_2_bm, 3
+.equ LED_3_bm, 4
+.equ LED_4_bm, 5
+.equ LED_5_bm, 6
+.equ LED_6_bm, 7
+.equ LED_7_bm, 8
 
 main:
+  swi ledInit 
+  
+  swi ledOn+LED_0_bm
 
 
 swi_handler:
@@ -66,10 +69,10 @@ swi_handler:
 
   ands R2, R3,#0xff00 //Parameter 1 extrahieren
   lsr R2, #8 //normalisieren
-  movne R0, R2 //Falls gültig parameter in R0 laden
+  movne R1, R2 //Falls gültig parameter in R1 laden
 
   ands R2, R3,#0xff //Parameter 2 extrahieren
-  movne R1, R2 //Falls gültig parameter in R0 laden
+  movne R0, R2 //Falls gültig parameter in R0 laden
 
   ldr R2,=EntryTable // lade Adresse der Funktionstabelle
   ldr R2,[R2,R4,LSR#14] //Zeiger auf Funktion zusammensetzen
@@ -80,13 +83,37 @@ swi_end:
 _ledInit:
   push {r0-r1}
   ldr r0, =IOPIN1 //Adresse von IOPIN1 in r0 laden
-  add r0, r0, IODIR //Offset für DIR addieren
-  ldr r1, =#0x00ff0000 //Maske um die register als Ausgang zu setzen in r1 laden
+  add r0, r0, #IODIR //Offset für DIR addieren
+  ldr r1, =#0x00ffff000 //Maske um die register als Ausgang zu setzen in r1 laden
   str r1, [r0] //register der lampen auf 1 setzen (Ausgang)
   pop {r0-r1}
   bx lr
 
 _ledOn:
+  //In R0 liegt der Parameter für die lampe die an gehen soll
+
+  push {r0-r2}
+
+  ldr r2, =IOPIN1
+  add r2, #IOSET
+  ldr r3, [r2] //Inhalt von IOSET1 in r3 laden
+
+  lsl r0, #16 //LED Parameter um 16 nach links shiften
+  str r0, [r2] //Ergebnis im SET register speichern
+
+  pop {r0-r2}
+  bx lr
+
+
+_ledOff:
+
+_ledToggle:
+
+_keyInit:
+
+_isPressed:
+
+_delay:
   
   
      
