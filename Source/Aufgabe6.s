@@ -30,7 +30,6 @@ EntryTable:
 .word  _isPressed
 .word  _delay
 
-
 .equ IOPIN0, 0xE0028000
 .equ IOPIN1, 0xE0028010
 
@@ -56,20 +55,39 @@ main:
 
 
 swi_handler:
-  STMFD R13!,{R0-R3,R14} // Arbeitsregister sichern (R14 RücksprungAdresse) (R13 Stackpointer)
+  STMFD R13!,{R0-R4,R14} // Arbeitsregister sichern (R14 RücksprungAdresse) (R13 Stackpointer)
 
   ldr R3,[R14,#-4] // den Opcode der SWI Funktion holen
   bic R3,R3,#0xff000000 // Opcode der SWI Anweisung entfernen
 
-  ldr R0, =#0xffff // Lade 0xffff in ein Register
-  bic R1, R3, R0 // Parameter entfernen (Bits 15..0)
-  ldr R2,=EntryTable // lade Adresse der Funktionstabelle
-  ldr R15,[R2,R1,LSR#14] // führe die Funktion aus (adresse in PC laden)
 
+  ldr R0, =#0xffff // Lade 0xffff in ein Register
+  bic R4, R3, R0 // Parameter entfernen (Bits 15..0)
+
+  ands R2, R3,#0xff00 //Parameter 1 extrahieren
+  lsr R2, #8 //normalisieren
+  movne R0, R2 //Falls gültig parameter in R0 laden
+
+  ands R2, R3,#0xff //Parameter 2 extrahieren
+  movne R1, R2 //Falls gültig parameter in R0 laden
+
+  ldr R2,=EntryTable // lade Adresse der Funktionstabelle
+  ldr R2,[R2,R4,LSR#14] //Zeiger auf Funktion zusammensetzen
+  bx R2 // führe die Funktion aus (adresse in PC laden)
 swi_end:
-  LDMFD R13!,{R0-R3,R15}^// Arbeitsregister wiederherstellen
+  LDMFD R13!,{R0-R4,R15}^// Arbeitsregister wiederherstellen
 
 _ledInit:
+  push {r0-r1}
+  ldr r0, =IOPIN1 //Adresse von IOPIN1 in r0 laden
+  add r0, r0, IODIR //Offset für DIR addieren
+  ldr r1, =#0x00ff0000 //Maske um die register als Ausgang zu setzen in r1 laden
+  str r1, [r0] //register der lampen auf 1 setzen (Ausgang)
+  pop {r0-r1}
+  bx lr
+
+_ledOn:
+  
   
      
 
