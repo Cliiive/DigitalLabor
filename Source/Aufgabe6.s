@@ -42,17 +42,23 @@ EntryTable:
 .equ BUTTON_2_bm, (1<<12)
 .equ BUTTON_3_bm, (1<<13)
 
-.equ LED_0_bm, 1
-.equ LED_1_bm, 2
-.equ LED_2_bm, 3
-.equ LED_3_bm, 4
-.equ LED_4_bm, 5
-.equ LED_5_bm, 6
-.equ LED_6_bm, 7
-.equ LED_7_bm, 8
+.equ LED_0_bm, 1<<0
+.equ LED_1_bm, 1<<1
+.equ LED_2_bm, 1<<2
+.equ LED_3_bm, 1<<3
+.equ LED_4_bm, 1<<4
+.equ LED_5_bm, 1<<5
+.equ LED_6_bm, 1<<6
+.equ LED_7_bm, 1<<7
 
 main:
-  swi ledInit 
+
+  swi ledInit+LED_0_bm 
+  swi ledInit+LED_1_bm 
+  swi ledInit+LED_2_bm 
+  swi ledInit+LED_3_bm 
+  swi ledInit+LED_4_bm 
+  swi ledInit+LED_5_bm 
   swi ledOn+LED_0_bm
   swi ledOn+LED_1_bm
   swi ledOff+LED_0_bm
@@ -82,42 +88,51 @@ swi_end:
   LDMFD R13!,{R0-R4,R15}^// Arbeitsregister wiederherstellen
 
 _ledInit:
-  push {r0-r1}
-  ldr r0, =IOPIN1 //Adresse von IOPIN1 in r0 laden
-  add r0, r0, #IODIR //Offset für DIR addieren
-  ldr r1, =#0x00ffff000 //Maske um die register als Ausgang zu setzen in r1 laden
-  str r1, [r0] //register der lampen auf 1 setzen (Ausgang)
-  pop {r0-r1}
+  //In R0 liegt der Parameter für die lampe die an gehen soll
+
+  push {r0-r3}
+
+  ldr r2, =IOPIN1
+  add r2, #IODIR
+  ldr r3, [r2] //Inhalt von IODIR1 in r3 laden
+
+  lsl r0, #16 //LED Parameter um 16 nach links shiften
+  orr r0, r0, r3 //Verodern
+  str r0, [r2] //Ergebnis im SET register speichern
+
+  pop {r0-r3}
   bx lr
 
 _ledOn:
   //In R0 liegt der Parameter für die lampe die an gehen soll
 
-  push {r0-r2}
+  push {r0-r3}
 
   ldr r2, =IOPIN1
   add r2, #IOSET
   ldr r3, [r2] //Inhalt von IOSET1 in r3 laden
 
   lsl r0, #16 //LED Parameter um 16 nach links shiften
+  orr r0, r0, r3 //Verodern
   str r0, [r2] //Ergebnis im SET register speichern
 
-  pop {r0-r2}
+  pop {r0-r3}
   bx lr
 
 _ledOff:
   //In R0 liegt der Parameter für die lampe die an gehen soll
 
-  push {r0-r2}
+  push {r0-r3}
 
   ldr r2, =IOPIN1
   add r2, #IOCLR
-  ldr r3, [r2] //Inhalt von IOSET1 in r3 laden
+  ldr r3, [r2] //Inhalt von IOCLR1 in r3 laden
 
   lsl r0, #16 //LED Parameter um 16 nach links shiften
+  orr r0, r0, r3
   str r0, [r2] //Ergebnis im SET register speichern
 
-  pop {r0-r2}
+  pop {r0-r3}
   bx lr
 
 _ledToggle:
