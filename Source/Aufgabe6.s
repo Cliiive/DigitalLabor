@@ -53,8 +53,9 @@ EntryTable:
 
 main:
   swi ledInit 
-  
   swi ledOn+LED_0_bm
+  swi ledOn+LED_1_bm
+  swi ledOff+LED_0_bm
 
 
 swi_handler:
@@ -104,8 +105,20 @@ _ledOn:
   pop {r0-r2}
   bx lr
 
-
 _ledOff:
+  //In R0 liegt der Parameter für die lampe die an gehen soll
+
+  push {r0-r2}
+
+  ldr r2, =IOPIN1
+  add r2, #IOCLR
+  ldr r3, [r2] //Inhalt von IOSET1 in r3 laden
+
+  lsl r0, #16 //LED Parameter um 16 nach links shiften
+  str r0, [r2] //Ergebnis im SET register speichern
+
+  pop {r0-r2}
+  bx lr
 
 _ledToggle:
 
