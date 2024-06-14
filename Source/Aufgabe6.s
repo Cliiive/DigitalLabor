@@ -51,28 +51,15 @@ EntryTable:
 .equ LED_6_bm, 1<<6
 .equ LED_7_bm, 1<<7
 
-main:
-
-  swi ledInit+LED_0_bm 
-  swi ledInit+LED_1_bm 
-  swi ledInit+LED_2_bm 
-  swi ledInit+LED_3_bm 
-  swi ledInit+LED_4_bm 
-  swi ledInit+LED_5_bm 
-  swi ledOn+LED_0_bm
-  swi ledOn+LED_1_bm
-  swi ledOff+LED_0_bm
-
-
 swi_handler:
-  STMFD R13!,{R0-R4,R14} // Arbeitsregister sichern (R14 RücksprungAdresse) (R13 Stackpointer)
+  STMFD R13!,{R0-R5,R14} // Arbeitsregister sichern (R14 RücksprungAdresse) (R13 Stackpointer)
 
   ldr R3,[R14,#-4] // den Opcode der SWI Funktion holen
   bic R3,R3,#0xff000000 // Opcode der SWI Anweisung entfernen
 
 
-  ldr R0, =#0xffff // Lade 0xffff in ein Register
-  bic R4, R3, R0 // Parameter entfernen (Bits 15..0)
+  ldr R5, =#0xffff // Lade 0xffff in ein Register
+  bic R4, R3, R5 // Parameter entfernen (Bits 15..0)
 
   ands R2, R3,#0xff00 //Parameter 1 extrahieren
   lsr R2, #8 //normalisieren
@@ -83,9 +70,10 @@ swi_handler:
 
   ldr R2,=EntryTable // lade Adresse der Funktionstabelle
   ldr R2,[R2,R4,LSR#14] //Zeiger auf Funktion zusammensetzen
+  //mov lr, r14 // Restore the return address
   bx R2 // führe die Funktion aus (adresse in PC laden)
 swi_end:
-  LDMFD R13!,{R0-R4,R15}^// Arbeitsregister wiederherstellen
+  LDMFD R13!,{R0-R5,R15}^// Arbeitsregister wiederherstellen
 
 _ledInit:
   //In R0 liegt der Parameter für die lampe die an gehen soll
@@ -121,7 +109,6 @@ _ledOn:
 
 _ledOff:
   //In R0 liegt der Parameter für die lampe die an gehen soll
-
   push {r0-r3}
 
   ldr r2, =IOPIN1
@@ -136,14 +123,65 @@ _ledOff:
   bx lr
 
 _ledToggle:
+  //In R0 liegt der Parameter für die lampe die an gehen soll
+  push {r0-r3}
 
+  lsl r0, #16 //LED Parameter um 16 nach links shiften
+
+  ldr r2, =IOPIN1
+  ldr r3, [r2] //Inhalt von IOCLR1 in r3 laden
+  and r1, r0, r3
+  cmp r1, r0
+
+  beq ledIsOn
+  b ledIsOff
+
+  ledIsOn:
+    ldr r2, =IOPIN1
+    add r2, #IOCLR
+    ldr r3, [r2] //Inhalt von IOCLR1 in r3 laden
+    orr r0, r0, r3
+    str r0, [r2] //Ergebnis im SET register speichern
+    b toggleEnd
+
+  ledIsOff:
+    ldr r2, =IOPIN1
+    add r2, #IOSET
+    ldr r3, [r2] //Inhalt von IOSET1 in r3 laden
+    orr r0, r0, r3 //Verodern
+    str r0, [r2] //Ergebnis im SET register speichern
+
+toggleEnd:
+  pop {r0-r3}
+  bx lr
+  
+  
 _keyInit:
 
 _isPressed:
 
 _delay:
   
+main:
   
+  mov r0, #LED_0_bm
+  swi ledInit
+  swi ledInit+LED_1_bm 
+  swi ledInit+LED_2_bm 
+  swi ledInit+LED_3_bm 
+  swi ledInit+LED_4_bm 
+  swi ledInit+LED_5_bm
+  swi ledInit+LED_6_bm
+  swi ledInit+LED_7_bm
+  
+  swi ledOn+LED_6_bm
+  swi ledOn+LED_7_bm
+
+  swi ledToggle+LED_0_bm
+  swi ledToggle+LED_7_bm
      
+stop:
+	nop
+	bal stop
 
 .end

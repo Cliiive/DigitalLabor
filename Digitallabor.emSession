@@ -11,6 +11,7 @@
   <BreakpointListItem trigger="" line="15" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="Source/Aufgabe3_3.s" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="16" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="Source/Aufgabe4_1.s" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="56" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="Source/Aufgabe5_3.s" useHWbreakpoint="false"/>
+  <BreakpointListItem trigger="" line="93" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="Source/Aufgabe6.s" useHWbreakpoint="false"/>
   <BreakpointListItem trigger="" line="14" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="4" filename="Source/BeispielAufgabe1_1.s" useHWbreakpoint="false"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
@@ -86,11 +87,11 @@
  </Memory4>
  <Project>
   <ProjectSessionItem path="Digitallabor"/>
-  <ProjectSessionItem path="Digitallabor;Aufgabe3"/>
-  <ProjectSessionItem path="Digitallabor;Aufgabe3;Source"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe5"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe5;Source"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe5;System"/>
+  <ProjectSessionItem path="Digitallabor;Aufgabe6"/>
+  <ProjectSessionItem path="Digitallabor;Aufgabe6;Source"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe9"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe9;Source"/>
  </Project>
@@ -173,11 +174,10 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="18" useTextEdit="1" path="Source/Aufgabe5_1.s" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="21" y="41" useTextEdit="1" path="Source/Aufgabe5_2.s" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="27" y="6" useTextEdit="1" path="Source/Aufgabe5_3.s" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/Aufgabe3_2.s" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="105" useTextEdit="1" path="System/crt0.s" left="0" selected="1" top="81" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="105" useTextEdit="1" path="System/crt0.s" left="0" top="81" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="55" useTextEdit="1" path="Source/Aufgabe6.s" left="0" selected="1" top="54" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="25" y="48" useTextEdit="1" path="Source/Aufgabe5_3.s" left="0" top="16" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="20" useTextEdit="1" path="Source/Aufgabe5_1.s" left="0" top="3" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="Aufgabe5" fileDialogDefaultFilter="*.asm;*.s;*.inc" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/hs/dtl/Workspace_DTL/Source" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <EMStudioWindow activeProject="Aufgabe6" fileDialogDefaultFilter="*.asm;*.s;*.inc" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/hs/dtl/Workspace_DTL/Source" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>
