@@ -70,8 +70,8 @@ swi_handler:
 
   ldr R2,=EntryTable // lade Adresse der Funktionstabelle
   ldr R2,[R2,R4,LSR#14] //Zeiger auf Funktion zusammensetzen
-  //mov lr, r14 // Restore the return address
   bx R2 // führe die Funktion aus (adresse in PC laden)
+
 swi_end:
   LDMFD R13!,{R0-R5,R15}^// Arbeitsregister wiederherstellen
 
@@ -89,7 +89,7 @@ _ledInit:
   str r0, [r2] //Ergebnis im SET register speichern
 
   pop {r0-r3}
-  bx lr
+  b swi_end
 
 _ledOn:
   //In R0 liegt der Parameter für die lampe die an gehen soll
@@ -105,7 +105,7 @@ _ledOn:
   str r0, [r2] //Ergebnis im SET register speichern
 
   pop {r0-r3}
-  bx lr
+  b swi_end
 
 _ledOff:
   //In R0 liegt der Parameter für die lampe die an gehen soll
@@ -120,7 +120,7 @@ _ledOff:
   str r0, [r2] //Ergebnis im SET register speichern
 
   pop {r0-r3}
-  bx lr
+  b swi_end
 
 _ledToggle:
   //In R0 liegt der Parameter für die lampe die an gehen soll
@@ -153,7 +153,7 @@ _ledToggle:
 
   toggleEnd:
     pop {r0-r3}
-    bx lr
+    b swi_end
   
 _keyInit:
   push {r0-r2}
@@ -167,7 +167,7 @@ _keyInit:
   str r0, [r1]
 
   pop {r0-r2}
-  bx lr
+  b swi_end
   
 _isPressed:
   push {r1, r2}
@@ -179,17 +179,17 @@ _isPressed:
   bne notPressed // branch if button is not pressed
 
   // button is pressed,
-  mov r0, #1
+  mov r7, #1
   b check_done // brunch to end
 
   // button is not pressed
   notPressed:
-    mov r0, #0
+    mov r7, #0
   
   // r0 = 0 if not pressed, r0 = 1 if pressed
   check_done:
     pop {r1, r2}
-    bx lr
+    b swi_end
 
 _delay:
   
@@ -203,9 +203,16 @@ main:
   swi ledInit+LED_4_bm
   swi ledInit+LED_5_bm
   swi ledInit+LED_6_bm
+  swi ledInit+LED_7_bm
   
   jump:
-  swi ledOn+LED_0_bm
+  swi isPressed+BUTTON_0_bm
+  cmp r7, #1
+
+  swieq ledOn+LED_0_bm
+  beq jump
+
+  swi ledOff+LED_0_bm
   b jump
   
      
