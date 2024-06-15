@@ -192,10 +192,21 @@ _isPressed:
     b swi_end
 
 _delay:
+ push {r0}
+ delay_loop:
+    subs r0, r0, #1
+    bne delay_loop
+  pop {r0}
+  b swi_end
   
 main:
-  
+  //INIT all Buttons
   swi keyInit+BUTTON_0_bm
+  swi keyInit+BUTTON_1_bm
+  swi keyInit+BUTTON_2_bm
+  swi keyInit+BUTTON_3_bm
+
+  //INIT all LEDS
   swi ledInit+LED_0_bm
   swi ledInit+LED_1_bm
   swi ledInit+LED_2_bm
@@ -205,17 +216,80 @@ main:
   swi ledInit+LED_6_bm
   swi ledInit+LED_7_bm
   
-  jump:
-  swi isPressed+BUTTON_0_bm
-  cmp r7, #1
+  //Start with the main programm
+  mov r8, #0
+  loop:
+    swi isPressed+BUTTON_3_bm
+    cmp r7, #1
+    beq addONE
+    
+    swi isPressed+BUTTON_2_bm
+    cmp r7, #1
+    beq addTWO
 
-  swieq ledOn+LED_0_bm
-  beq jump
+    swi isPressed+BUTTON_1_bm
+    cmp r7, #1
+    beq addTHREE
 
-  swi ledOff+LED_0_bm
-  b jump
+    swi isPressed+BUTTON_0_bm
+    cmp r7, #1
+    beq addFOUR
+    
+    b loop
+    
+    addONE:
+      add r8, #1
+      b updateLEDS
+
+    addTWO:
+      add r8, #2
+      b updateLEDS
   
-     
+    addTHREE:
+      add r8, #3
+      b updateLEDS
+    
+    addFOUR:
+      add r8, #4
+      b updateLEDS
+
+updateLEDS:
+  ands r9, r8, #LED_0_bm
+  swine ledOn+LED_7_bm
+  swieq ledOff+LED_7_bm
+
+  ands r9, r8, #LED_1_bm
+  swine ledOn+LED_6_bm
+  swieq ledOff+LED_6_bm
+
+  ands r9, r8, #LED_2_bm
+  swine ledOn+LED_5_bm
+  swieq ledOff+LED_5_bm
+
+  ands r9, r8, #LED_3_bm
+  swine ledOn+LED_4_bm
+  swieq ledOff+LED_4_bm
+
+  ands r9, r8, #LED_4_bm
+  swine ledOn+LED_3_bm
+  swieq ledOff+LED_3_bm
+
+  ands r9, r8, #LED_5_bm
+  swine ledOn+LED_2_bm
+  swieq ledOff+LED_2_bm
+
+  ands r9, r8, #LED_6_bm
+  swine ledOn+LED_1_bm
+  swieq ledOff+LED_1_bm
+
+  ands r9, r8, #LED_7_bm
+  swine ledOn+LED_0_bm
+  swieq ledOff+LED_0_bm
+  
+  ldr r0, =#0xafffff
+  swi delay
+  b loop
+
 stop:
 	nop
 	bal stop
