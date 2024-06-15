@@ -37,10 +37,10 @@ EntryTable:
 .equ IODIR, 0x08
 .equ IOCLR, 0x0C
 
-.equ BUTTON_0_bm, (1<<10)
-.equ BUTTON_1_bm, (1<<11)
-.equ BUTTON_2_bm, (1<<12)
-.equ BUTTON_3_bm, (1<<13)
+.equ BUTTON_0_bm, (1<<0)
+.equ BUTTON_1_bm, (1<<1)
+.equ BUTTON_2_bm, (1<<2)
+.equ BUTTON_3_bm, (1<<3)
 
 .equ LED_0_bm, 1<<0
 .equ LED_1_bm, 1<<1
@@ -151,34 +151,63 @@ _ledToggle:
     orr r0, r0, r3 //Verodern
     str r0, [r2] //Ergebnis im SET register speichern
 
-toggleEnd:
-  pop {r0-r3}
-  bx lr
-  
+  toggleEnd:
+    pop {r0-r3}
+    bx lr
   
 _keyInit:
+  push {r0-r2}
+  lsl r0, #10 //Parameter um 10 nach links shiften
+  mvn r0, r0 //Register invertieren
 
+  ldr r1, =IOPIN0
+  add r1, #IODIR
+  ldr r2, [r1]
+  and r0, r2
+  str r0, [r1]
+
+  pop {r0-r2}
+  bx lr
+  
 _isPressed:
+  push {r1, r2}
+  lsl r0, #10 //Parameter um 10 nach links shiften
+
+  ldr r1, =IOPIN0 // Load input values from IOPIN to register r0
+  ldr r2, [r1]
+  ands r0, r0, r2 // check if button is pressed
+  bne notPressed // branch if button is not pressed
+
+  // button is pressed,
+  mov r0, #1
+  b check_done // brunch to end
+
+  // button is not pressed
+  notPressed:
+    mov r0, #0
+  
+  // r0 = 0 if not pressed, r0 = 1 if pressed
+  check_done:
+    pop {r1, r2}
+    bx lr
 
 _delay:
   
 main:
   
-  mov r0, #LED_0_bm
-  swi ledInit
-  swi ledInit+LED_1_bm 
-  swi ledInit+LED_2_bm 
-  swi ledInit+LED_3_bm 
-  swi ledInit+LED_4_bm 
+  swi keyInit+BUTTON_0_bm
+  swi ledInit+LED_0_bm
+  swi ledInit+LED_1_bm
+  swi ledInit+LED_2_bm
+  swi ledInit+LED_3_bm
+  swi ledInit+LED_4_bm
   swi ledInit+LED_5_bm
   swi ledInit+LED_6_bm
-  swi ledInit+LED_7_bm
   
-  swi ledOn+LED_6_bm
-  swi ledOn+LED_7_bm
-
-  swi ledToggle+LED_0_bm
-  swi ledToggle+LED_7_bm
+  jump:
+  swi ledOn+LED_0_bm
+  b jump
+  
      
 stop:
 	nop
