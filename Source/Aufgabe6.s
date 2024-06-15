@@ -200,6 +200,10 @@ _delay:
   b swi_end
   
 main:
+  //Eine Test Anwendung die einen Addierer implementiert
+  //Die Buttons stehen von rechts nach links gelesen für 1, 2, 3, 4
+  //Das Ergebnis der additionen wird binär auf den Lampen angezeigt
+
   //INIT all Buttons
   swi keyInit+BUTTON_0_bm
   swi keyInit+BUTTON_1_bm
@@ -217,7 +221,7 @@ main:
   swi ledInit+LED_7_bm
   
   //Start with the main programm
-  mov r8, #0
+  mov r8, #0 //Speicher für die Addition
   loop:
     swi isPressed+BUTTON_3_bm
     cmp r7, #1
