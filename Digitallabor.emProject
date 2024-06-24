@@ -416,7 +416,9 @@
       <file file_name="Setup/sram_placement.xml" />
     </folder>
     <folder Name="Source">
-      <file file_name="Source/Aufgabe8.c" />
+      <file file_name="Source/Aufgabe8.c">
+        <configuration Name="Debug" build_exclude_from_build="No" />
+      </file>
     </folder>
     <folder Name="System">
       <file file_name="System/ARM_Startup_Hardware.s" />
