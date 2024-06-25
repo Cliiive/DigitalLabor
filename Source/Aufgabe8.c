@@ -70,6 +70,30 @@ uint8_t* unpack(uint8_t value) {
     return result;                // Rückgabe des Ergebnisfeldes
 }
 
+//Aufgabe 8 b)
+uint8_t pack(uint8_t* bits) {
+    uint8_t value = 0;
+
+    // Inline-Assembly-Block für die Konvertierung
+    asm (
+        "mov r2, %[bits_asm] \n"        // Lade die Adresse des Eingabefeldes in r2
+        "mov r3, #8 \n"                 // Setze den Zähler auf 8
+
+        "loop_pack: \n"
+        "ldrb r4, [r2], #1 \n"          // Lade das Bit aus dem Eingabefeld und inkrementiere die Adresse
+        "lsl %[value_asm], %[value_asm], #1 \n"  // Verschiebe den aktuellen Wert um 1 Bit nach links
+        "orr %[value_asm], %[value_asm], r4 \n"  // Setze das Bit an die niedrigste Stelle
+        "subs r3, r3, #1 \n"            // Dekrementiere den Zähler
+        "bne loop_pack \n"              // Wiederhole, solange der Zähler nicht 0 ist
+
+        : [value_asm]"+r" (value)       // Ausgabe: value (der zusammengesetzte 8-Bit-Wert)
+        : [bits_asm]"r" (bits)          // Eingabe: bits (das Feld mit den Bits)
+        : "r2", "r3", "r4"              // Clobbered Registers
+    );
+
+    return value;                       // Rückgabe des zusammengesetzten Wertes
+}
+
 int main() {
   result_t* result1;
   uint32_t a = 0xffffffff;
@@ -79,4 +103,6 @@ int main() {
 
   uint8_t value = 0x98;         // Beispielwert: 10011000 in binär
   uint8_t* result2 = unpack(value);
+
+  uint8_t result3 = pack(result2); 
 };
