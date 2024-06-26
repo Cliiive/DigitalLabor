@@ -41,16 +41,8 @@ main:
 
   ldr r0, =IOPIN1 //Adresse von Port 1 in r0 laden
 
-  ldr r1, =IODIR //Offset
-  add r1, r0, r1 //IODIR1 in r1 laden
   ldr r2, =(LED_0_bm | LED_1_bm | LED_2_bm | LED_3_bm | LED_4_bm | LED_5_bm | LED_6_bm | LED_7_bm)  //Maske um die register zurückzusetzen in r1 laden
-  str r2, [r1] //Lampen auf senden setzen
-
-  //ldr r2, =IOSET //Offset
-  //add r2, r0, r2 //IOSET1 in r2 laden
-
-  //ldr r3, =IOCLR //Offset
-  //add r3, r0, r3 //IOCLR1 in r3 laden
+  str r2, [r0, #IODIR] //Lampen auf senden setzen
 
   loop:
   ldr r1, =0x2

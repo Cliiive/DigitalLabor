@@ -81,12 +81,12 @@ _ledInit:
   push {r0-r3}
 
   ldr r2, =IOPIN1
-  add r2, #IODIR
-  ldr r3, [r2] //Inhalt von IODIR1 in r3 laden
+  //add r2, #IODIR
+  ldr r3, [r2, #IODIR] //Inhalt von IODIR1 in r3 laden
 
   lsl r0, #16 //LED Parameter um 16 nach links shiften
   orr r0, r0, r3 //Verodern
-  str r0, [r2] //Ergebnis im SET register speichern
+  str r0, [r2, #IODIR] //Ergebnis im SET register speichern
 
   pop {r0-r3}
   b swi_end
@@ -97,12 +97,12 @@ _ledOn:
   push {r0-r3}
 
   ldr r2, =IOPIN1
-  add r2, #IOSET
-  ldr r3, [r2] //Inhalt von IOSET1 in r3 laden
+  //add r2, #IOSET
+  ldr r3, [r2, #IOSET] //Inhalt von IOSET1 in r3 laden
 
   lsl r0, #16 //LED Parameter um 16 nach links shiften
   orr r0, r0, r3 //Verodern
-  str r0, [r2] //Ergebnis im SET register speichern
+  str r0, [r2, #IOSET] //Ergebnis im SET register speichern
 
   pop {r0-r3}
   b swi_end
