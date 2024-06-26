@@ -112,12 +112,12 @@ _ledOff:
   push {r0-r3}
 
   ldr r2, =IOPIN1
-  add r2, #IOCLR
-  ldr r3, [r2] //Inhalt von IOCLR1 in r3 laden
+  //add r2, #IOCLR
+  ldr r3, [r2, #IOCLR] //Inhalt von IOCLR1 in r3 laden
 
   lsl r0, #16 //LED Parameter um 16 nach links shiften
   orr r0, r0, r3
-  str r0, [r2] //Ergebnis im SET register speichern
+  str r0, [r2, #IOCLR] //Ergebnis im SET register speichern
 
   pop {r0-r3}
   b swi_end
@@ -138,16 +138,16 @@ _ledToggle:
 
   ledIsOn:
     ldr r2, =IOPIN1
-    add r2, #IOCLR
-    ldr r3, [r2] //Inhalt von IOCLR1 in r3 laden
+    //add r2, #IOCLR
+    ldr r3, [r2, #IOCLR] //Inhalt von IOCLR1 in r3 laden
     orr r0, r0, r3
     str r0, [r2] //Ergebnis im SET register speichern
     b toggleEnd
 
   ledIsOff:
     ldr r2, =IOPIN1
-    add r2, #IOSET
-    ldr r3, [r2] //Inhalt von IOSET1 in r3 laden
+    //add r2, #IOSET
+    ldr r3, [r2, #IOSET] //Inhalt von IOSET1 in r3 laden
     orr r0, r0, r3 //Verodern
     str r0, [r2] //Ergebnis im SET register speichern
 
@@ -161,8 +161,8 @@ _keyInit:
   mvn r0, r0 //Register invertieren
 
   ldr r1, =IOPIN0
-  add r1, #IODIR
-  ldr r2, [r1]
+  //add r1, #IODIR
+  ldr r2, [r1, #IODIR]
   and r0, r2
   str r0, [r1]
 
