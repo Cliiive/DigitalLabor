@@ -12,7 +12,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-//#include "LPC21XX.h"
+#include "LPC21XX.h"
 
 void FIQ_Handler (void)__attribute__((interrupt ("FIQ")));
 void IRQ (void)__attribute__((interrupt ("IRQ")));
