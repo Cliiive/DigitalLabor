@@ -53,12 +53,13 @@ main:
   add r3, r0, r3 //IOCLR1 in r3 laden
 
   loop:
+  ldr r1, =0x2
   mov r7, #BUTTON_0_bm
   mov r8, #LED_0_bm
   bl switch_leds //Button in r7, LED in r8
 
   mov r7, #BUTTON_1_bm
-  mov r8, #LED_2_bm
+  mov r8, #LED_1_bm
   bl switch_leds //Button in r7, LED in r8
 
   mov r7, #BUTTON_2_bm
@@ -66,7 +67,7 @@ main:
   bl switch_leds //Button in r7, LED in r8
 
   mov r7, #BUTTON_3_bm
-  mov r8, #LED_6_bm
+  mov r8, #LED_5_bm
   bl switch_leds //Button in r7, LED in r8
 
   b loop
@@ -82,18 +83,18 @@ switch_leds:
   mov r5, r7 // Load mask for the button 0 in r5
   ldr r0, [r4] // Load input values from IOPIN to register r0
   ands r0, r5, r0 // check if button 0 is pressed
-  bne noled1 // branch if button is not pressed
+  beq noled1 // branch if button is not pressed
 
   // button is pressed,
   str r6, [r2] // switch pins defined in r9 on (IOSET1) (first LED on)
-  mov r6, r6, lsl #1 // shift mask to second LED
+  mov r6, r6, lsl r1 // shift mask to second LED
   str r6, [r3] // switch pins defined in r9 off (IOCLR1) (second LED off)
   b led_done // brunch to end
 
   // button is not pressed
   noled1:
   str r6, [r3] // switch pins defined in r9 off (IOCLR1) (first LED off)
-  mov r6, r6, lsl #1 // shift mask to second LED
+  mov r6, r6, lsl r1 // shift mask to second LED
   str r6, [r2] // switch pins defined in r9 on (IOSET1) (second LED on)
   led_done: // End subrutine
   
