@@ -89,10 +89,10 @@
   <ProjectSessionItem path="Digitallabor;Aufgabe5"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe5;Source"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe5;System"/>
-  <ProjectSessionItem path="Digitallabor;Aufgabe8"/>
-  <ProjectSessionItem path="Digitallabor;Aufgabe8;Setup"/>
-  <ProjectSessionItem path="Digitallabor;Aufgabe8;Source"/>
-  <ProjectSessionItem path="Digitallabor;Aufgabe8;System"/>
+  <ProjectSessionItem path="Digitallabor;Aufgabe6"/>
+  <ProjectSessionItem path="Digitallabor;Aufgabe6;Source"/>
+  <ProjectSessionItem path="Digitallabor;Aufgabe7"/>
+  <ProjectSessionItem path="Digitallabor;Aufgabe7;Source"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe9"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe9;Setup"/>
   <ProjectSessionItem path="Digitallabor;Aufgabe9;Source"/>
@@ -177,15 +177,11 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="56" useTextEdit="1" path="Source/Aufgabe9.c" left="0" top="23" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/Aufgabe7_1.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="60" y="43" useTextEdit="1" path="Source/Aufgabe8.c" left="0" top="14" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="17" y="19" useTextEdit="1" path="Source/Aufgabe5_1.s" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/BeispielAufgabe1_1.s" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/BeispielAufgabe1_2.s" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/BeispielAufgabe1_3.s" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="Source/BeispielAufgabe1_4.s" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="11" y="79" useTextEdit="1" path="System/crt0.s" left="0" selected="1" top="77" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="13" y="43" useTextEdit="1" path="Source/Aufgabe7_2.c" left="0" top="24" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="13" useTextEdit="1" path="Source/Aufgabe7_1.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="364" useTextEdit="1" path="System/crt0.s" left="0" top="335" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="3" y="43" useTextEdit="1" path="Source/Aufgabe7_3.c" left="0" selected="1" top="54" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="26" useTextEdit="1" path="Source/Aufgabe5_3.s" left="0" top="31" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="Aufgabe9" fileDialogDefaultFilter="*.asm;*.s;*.inc" autoConnectTarget="GDB Server" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/hs/dtl/Workspace_DTL/Source" debugSearchPath="" autoConnectCapabilities="1343"/>
+ <EMStudioWindow activeProject="Aufgabe7" fileDialogDefaultFilter="*.asm;*.s;*.inc" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/hs/dtl/Workspace_DTL/Source" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>
