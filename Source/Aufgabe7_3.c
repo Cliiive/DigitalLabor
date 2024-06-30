@@ -53,7 +53,7 @@ uint8_t processKeys() {
 
 uint8_t noEscapePressed() {
   uint8_t action = processKeys();
-  if (action == 5 || action == 2) {
+  if (action == 5) {
     return 1;
   } 
   else {
@@ -61,89 +61,50 @@ uint8_t noEscapePressed() {
   }
 }
 
-void runLightLeft() {
-  uint32_t paused = 0;
-  uint8_t counter = 0;
-  int mask = (1<<16);
-  while (noEscapePressed()){
-      if (counter == 0) {
-        mask = (1<<16);
-      }
-
-      IOSET1 = IOSET1 | mask;
-      if (processKeys() == 2) {
-        paused = !paused;
-        delay(0xB0000);
-      }
-      if (!paused) {
-      delay(0x90000);
-      IOCLR1 = mask;
-      mask = (mask<<1);
-      counter = (counter+1)%8;
-      }
-  }
+void runLightLeft(uint8_t counter, int *mask) {
+    if (counter == 0) {
+      *mask = (1<<23);
+    }
+    IOCLR1 = *mask;
+    IOSET1 = IOSET1 | *mask;
+    *mask = (*mask>>1);
 }
 
-void runLightRight() {
-  uint32_t paused = 0;
-  uint8_t counter = 0;
-  int mask = (1<<16);
-  while (noEscapePressed()){
-      if (counter == 0) {
-        mask = (1<<16);
-      }
-
-      IOSET1 = IOSET1 | mask;
-      if (processKeys() == 2) {
-        paused = !paused;
-        delay(0xB0000);
-      }
-      if (!paused) {
-      delay(0x90000);
-      IOCLR1 = mask;
-      mask = (mask<<1);
-      counter = (counter+1)%8;
-      }
-  }
+void runLightRight(uint8_t counter, int *mask) {
+    if (counter == 0) {
+      *mask = (1<<15);
+    }
+    //IOCLR1 = *mask;
+    IOCLR1 = *mask;
+    *mask = (*mask<<1);
+    IOSET1 = IOSET1 | *mask;
+    
+    
 }
 
 
 
 void runProgram() {
   uint8_t isRunning = 0;
-  uint8_t pause = 0;
-  uint8_t currentRight = 1;
+  uint8_t counter = 0;
+  int *mask;
+  int value = (1<<15);
+  mask = &value;
+
   while (1) {
-    uint32_t action = processKeys();
-    if (action == 0) {
-      uint8_t currentRight = 1;
-      isRunning = 1;
-      runLightRight();
-    }
+    uint8_t action = processKeys();
+
+    if (action == 0) {isRunning = 1;}
+    else if (action == 1) {break;}
+    else if (action == 2) {isRunning = 0;}
+
     if (isRunning) {
-      if (action == 1) {
-        isRunning = 0;
-      }
-      else if (action == 3) {
-        IOCLR1 = IOCLR1 & OUTPUT_MASK;
-      }
-      else if (action == 4) {
-        if (currentRight) {
-          currentRight = 0;
-          delay(0x40000);
-          runLightLeft();
-        }
-        else {
-          currentRight = 1;
-          delay(0x40000);
-          runLightRight();
-          }
-        }
+      runLightRight(counter, mask);
+      counter = (counter+1)%9;
     }
-    else {
-      delay(0x10000);
-    }
-}
+
+    delay(0x99999);
+  }
   
 }
 
