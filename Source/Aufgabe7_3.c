@@ -30,19 +30,19 @@ void delay(uint32_t delayParameter) {
 }
 
 uint8_t processKeys() {
-  if (IOPIN0 & BUTTON_0_bm) {
+  if (~IOPIN0 & BUTTON_0_bm) {
     return 0;
   }
-  else if (IOPIN0 & BUTTON_1_bm) {
+  else if (~IOPIN0 & BUTTON_1_bm) {
     return 1;
   }
-  else if (IOPIN0 & BUTTON_2_bm) {
+  else if (~IOPIN0 & BUTTON_2_bm) {
     return 2;
   }
-  else if (IOPIN0 & BUTTON_3_bm) {
+  else if (~IOPIN0 & BUTTON_3_bm) {
     return 3;
   }
-  else if (IOPIN0 & BUTTON_0_bm & BUTTON_2_bm) {
+  else if (~IOPIN0 & BUTTON_0_bm & BUTTON_2_bm) {
     return 4;
   }
   else {
@@ -50,36 +50,51 @@ uint8_t processKeys() {
   }
 }
 
-void runLightLeft(uint32_t *mask) {
-    for (uint8_t i=0; i<8; i++) {
-      uint32_t action = processKeys();
-      if (action == 5) {
-        IOSET1 = IOSET1 | *mask;
-        delay(0x900000);
-        IOCLR1 = *mask;
-        delay(0x100000);
-        *mask = (*mask>>1);
-      }
-      else {
-        break;
-      }
+uint8_t noButtonPressed() {
+  uint8_t action = processKeys();
+  if (action == 5) {
+    return 1;
+  } 
+  else {
+    return 0;
   }
 }
 
-void runLightRight(uint32_t *mask) {
-    for (uint8_t i=0; i<8; i++) {
-      uint32_t action = processKeys();
-      if (action == 5) {
-        IOSET1 = IOSET1 | *mask;
-        delay(0x900000);
-        IOCLR1 = *mask;
-        delay(0x100000);
-        *mask = (*mask<<1);
+void runLightLeft() {
+  uint8_t counter = 0;
+  int mask = (1<<23);
+  while (noButtonPressed()){
+      if (counter == 0) {
+        mask = (1<<23);
       }
-      else {
-        break;
+      IOSET1 = IOSET1 | mask;
+      delay(0x90000);
+      while (processKeys() == 2) {
+        delay(0x10000);
       }
-      
+      IOCLR1 = mask;
+      delay(0x10000);
+      mask = (mask>>1);
+      counter = (counter+1)%8;
+  }
+}
+
+void runLightRight() {
+  uint8_t counter = 0;
+  int mask = (1<<16);
+  while (noButtonPressed()){
+      if (counter == 0) {
+        mask = (1<<16);
+      }
+      IOSET1 = IOSET1 | mask;
+      delay(0x90000);
+      while (processKeys() == 2) {
+        delay(0x10000);
+      }
+      IOCLR1 = mask;
+      delay(0x10000);
+      mask = (mask<<1);
+      counter = (counter+1)%8;
   }
 }
 
@@ -87,32 +102,29 @@ void runLightRight(uint32_t *mask) {
 
 void runProgram() {
   uint32_t currentAction = 0;
-  uint8_t currentRight;
-  uint32_t *mask;
-  *mask = (1<<16);
+  uint8_t currentRight = 1;
   while (1) {
     uint32_t action = processKeys();
-    if (action != 2) {
-      if (action == 0) {
-        uint8_t currentRight = 1;
-        runLightRight(mask);
-      }
-      else if (action == 1) {
-        break;
-      }
-      else if (action == 3) {
-        IOCLR1 = IOCLR1 & OUTPUT_MASK;
-      }
-      else if (action == 4) {
-        if (currentRight) {
-          runLightRight(mask);
-        }
-        else {
-          runLightLeft(mask);
-        }
-      }
-      
+    if (action == 0) {
+      uint8_t currentRight = 1;
+      runLightRight();
     }
+    else if (action == 1) {
+      break;
+    }
+    else if (action == 3) {
+      IOCLR1 = IOCLR1 & OUTPUT_MASK;
+    }
+    else if (action == 4) {
+      if (currentRight) {
+        currentRight = 0;
+        runLightLeft();
+      }
+      else {
+        currentRight = 1;
+        runLightRight();
+    }
+  }
 }
   
 }
