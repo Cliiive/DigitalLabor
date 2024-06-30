@@ -31,7 +31,7 @@ void delay(uint32_t delayParameter) {
 
 uint8_t processKeys() {
   if ((~IOPIN0 & (BUTTON_0_bm | BUTTON_2_bm)) == (BUTTON_0_bm | BUTTON_2_bm)) {
-    //delay(0x900000);
+    delay(0x90000);
     return 4;
   }
   else if (~IOPIN0 & BUTTON_0_bm) {
