@@ -8,6 +8,7 @@
  */
 
 #include <stdint.h>
+#include <stdio.h>
 #include "LPC21XX.h"
 #define LED_MASK 0x00FF0000
 
@@ -17,7 +18,8 @@
 void FIQ_Handler (void)__attribute__((interrupt ("FIQ")));
 void IRQ (void)__attribute__((interrupt ("IRQ")));
 
-//Aufgabe 1
+//AUFGABE 1
+
 void configure() {
   //Enable alternative Function AIN0
   PINSEL1 &= ~(3 << 22); // Clear bits 22 and 23
@@ -31,6 +33,10 @@ void configure() {
   
   IODIR1 = LED_MASK;
 }
+
+
+
+//AUFGABE 2
 
 unsigned int readADC() {
     // Start ADC conversion
@@ -61,12 +67,57 @@ void displayOnLED(unsigned int value) {
     IOSET1 = IOSET1 | mask;  // Set LED port with new value
 }
 
-int main() {
-  configure();
-
+void runLedStrip(void) {
   while (1) {
-      unsigned int adcValue = readADC();
-      displayOnLED(adcValue);
-  }
+        unsigned int adcValue = readADC();
+        displayOnLED(adcValue);
+    }
+}
 
+
+
+
+//AUFGABE 3
+
+void UART0_Init() {
+    PINSEL0 |= 0x00000005;   // P0.0 as TXD0 and P0.1 as RXD0
+    U0LCR = 0x83;            // 8 bits, no Parity, 1 Stop bit, DLAB=1
+    U0DLM = 0;
+    U0DLL = 12;              // 115200 Baud Rate @ 18.432 MHz PCLK (18432000 / (16 * 115200) = 12)
+    U0LCR = 0x03;            // DLAB = 0
+    U0FCR = 0x07;            // Enable and reset TX and RX FIFO
+}
+
+void UART_SendChar(char ch) {
+    while (!(U0LSR & 0x20)); // Wait for THR to be empty
+    U0THR = ch;
+}
+
+void UART_SendString(char* str) {
+    while (*str) {
+        UART_SendChar(*str++);
+    }
+}
+
+void intToHex(unsigned int value, char* str) {
+    const char hexDigits[] = "0123456789ABCDEF";
+    str[0] = '0';
+    str[1] = 'X';
+    str[2] = hexDigits[(value >> 8) & 0xF];
+    str[3] = hexDigits[(value >> 4) & 0xF];
+    str[4] = hexDigits[value & 0xF];
+    str[5] = '\0';
+}
+
+int main(void) {
+  configure();
+  while (1) {
+        unsigned int adcValue = readADC();
+        displayOnLED(adcValue);
+
+        char hexString[6];
+        intToHex(adcValue, hexString);
+        UART_SendString(hexString);
+        UART_SendChar('\n');  // Newline for next v
+    }
 }
