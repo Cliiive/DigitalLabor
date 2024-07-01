@@ -38,7 +38,7 @@ unsigned int readADC() {
 
     // Wait for conversion to complete
     while (!(ADDR & (1 << 31)));  // Check DONE bit
-
+    int debug = ADDR;
     // Read the result
     return (ADDR >> 6) & 0x3FF;  // Extract 10-bit result
 }
@@ -46,10 +46,19 @@ unsigned int readADC() {
 void displayOnLED(unsigned int value) {
     // Convert 10-bit ADC value to 8-bit for LED display
     unsigned int ledValue = value >> 2;  // Scale down 10-bit to 8-bit
+    unsigned int mask = 0;
 
+    int numOfLeds = ledValue/32; //2^8 = 256 values are possible, so a new Led needs to apppear for every 32'th value
+
+    //Build the mask
+    for (int i = 0; i<=numOfLeds; i++) {
+        mask |= (1<<i);
+    }
+
+    mask <<= 16; //Shift Leds for 16 bits to left
     // Update LED display
-    IOCLR1 = LED_MASK;    // Clear LED port
-    IOSET1 = ledValue & LED_MASK;  // Set LED port with new value
+    IOCLR1 = ~mask;
+    IOSET1 = IOSET1 | mask;  // Set LED port with new value
 }
 
 int main() {

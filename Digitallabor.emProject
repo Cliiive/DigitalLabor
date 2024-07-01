@@ -455,6 +455,10 @@
       linker_section_placements_segments="FLASH1 RX 0x00000000 0x0003e000;RAM1 RWX 0x40000000 0x00004000;"
       project_directory=""
       project_type="Executable" />
+    <configuration
+      Name="Debug"
+      debug_target_connection="J-Link"
+      speed="100" />
     <folder Name="Setup">
       <file file_name="Setup/sram_placement.xml" />
     </folder>
