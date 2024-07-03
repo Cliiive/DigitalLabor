@@ -80,11 +80,12 @@ void runLedStrip(void) {
 //AUFGABE 3
 
 void UART0_Init() {
-    PINSEL0 |= 0x00000005;   // P0.0 as TXD0 and P0.1 as RXD0
-    U0LCR = 0x83;            // 8 bits, no Parity, 1 Stop bit, DLAB=1
+    PINSEL0 = PINSEL0 & ~0x0000000f; //Löschen 
+    PINSEL0 |= 0x0000005;   // P0.0 as TXD0 and P0.1 as RXD0
+    U0LCR = 0x82;            // 8 bits, no Parity, 1 Stop bit, DLAB=1
     U0DLM = 0;
-    U0DLL = 12;              // 115200 Baud Rate @ 18.432 MHz PCLK (18432000 / (16 * 115200) = 12)
-    U0LCR = 0x03;            // DLAB = 0
+    U0DLL = 120;              // 9600 Baud Rate @ 18.432 MHz PCLK (18432000 / (16 * 9600) = 120)
+    U0LCR = 0x02;            // DLAB = 0
     U0FCR = 0x07;            // Enable and reset TX and RX FIFO
 }
 
@@ -111,6 +112,7 @@ void intToHex(unsigned int value, char* str) {
 
 int main(void) {
   configure();
+  UART0_Init();
   while (1) {
         unsigned int adcValue = readADC();
         displayOnLED(adcValue);

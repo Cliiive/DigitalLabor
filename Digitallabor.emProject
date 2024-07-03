@@ -457,7 +457,7 @@
       project_type="Executable" />
     <configuration
       Name="Debug"
-      debug_target_connection="Simulator"
+      debug_target_connection="J-Link"
       speed="100" />
     <folder Name="Setup">
       <file file_name="Setup/sram_placement.xml" />
