@@ -82,11 +82,10 @@ void runLedStrip(void) {
 void UART0_Init() {
     PINSEL0 = PINSEL0 & ~0x0000000f; //Löschen 
     PINSEL0 |= 0x0000005;   // P0.0 as TXD0 and P0.1 as RXD0
-    U0LCR = 0x82;            // 8 bits, no Parity, 1 Stop bit, DLAB=1
+    U0LCR = 0x83;            // 8 bits, no Parity, 1 Stop bit, DLAB=1 => 0x10000011
     U0DLM = 0;
     U0DLL = 120;              // 9600 Baud Rate @ 18.432 MHz PCLK (18432000 / (16 * 9600) = 120)
-    U0LCR = 0x02;            // DLAB = 0
-    U0FCR = 0x07;            // Enable and reset TX and RX FIFO
+    U0LCR = 0x03;            // DLAB = 0
 }
 
 void UART_SendChar(char ch) {
